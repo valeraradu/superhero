@@ -40,7 +40,7 @@ public class SuperheroController {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Superhero> getSuperhero(@PathVariable("id") Long id) {
-        return new ResponseEntity<>(repository.findOne(id), HttpStatus.OK);
+        return new ResponseEntity<>(repository.findById(id).get(), HttpStatus.OK);
     }
 
     @PreAuthorize("authenticated")
@@ -48,7 +48,7 @@ public class SuperheroController {
             value = "/{id}")
     @ResponseStatus(value = HttpStatus.OK)
     public void delete(@PathVariable("id") long id) {
-        repository.delete(id);
+        repository.deleteById(id);
     }
 
 }

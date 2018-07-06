@@ -1,3 +1,4 @@
+/*
 package superhero.configs;
 
 import org.springframework.context.annotation.Bean;
@@ -12,3 +13,4 @@ public class HttpSessionConfig {
         return new HeaderHttpSessionStrategy();
     }
 }
+*/

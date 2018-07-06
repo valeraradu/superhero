@@ -66,7 +66,7 @@ public class SuperheroControllerTests {
 
         Superhero superhero = new Superhero("name", "pseudonym", "MARVEL", skillList, null, new Date());
         superhero = superheroController.addSuperhero(superhero).getBody();
-        Assert.notNull(repository.findOne(superhero.getId()));
+        Assert.notNull(repository.findById(superhero.getId()).get());
     }
 
     @Test
@@ -174,7 +174,7 @@ public class SuperheroControllerTests {
         Superhero superhero = new Superhero("name", "pseudonym", "MARVEL", skillList, null, new Date());
         Superhero saved = superheroController.addSuperhero(superhero).getBody();
 
-        Assert.notNull(repository.findOne(saved.getId()));
+        Assert.notNull(repository.findById(saved.getId()).get());
 
         Superhero superhero1 = new Superhero("name", "pseudonym1", "MARVEL", skillList, null, new Date());
         superheroController.addSuperhero(superhero1).getBody();
@@ -195,7 +195,7 @@ public class SuperheroControllerTests {
         Superhero superhero = new Superhero("name", "pseudonym", "MARVEL", skillList, null, new Date());
         Superhero saved = superheroController.addSuperhero(superhero).getBody();
 
-        Assert.notNull(repository.findOne(saved.getId()));
+        Assert.notNull(repository.findById(saved.getId()).get());
 
         Superhero superhero1 = new Superhero("name1", "pseudonym", "MARVEL", skillList, null, new Date());
         superheroController.addSuperhero(superhero1).getBody();
@@ -212,7 +212,7 @@ public class SuperheroControllerTests {
         Superhero superhero = new Superhero("name", "pseudonym", "MARVEL", skillList, null, new Date());
         Superhero superheroSaved = superheroController.addSuperhero(superhero).getBody();
 
-        Assert.notNull(repository.findOne(superheroSaved.getId()));
+        Assert.notNull(repository.findById(superheroSaved.getId()).get());
 
         List<String> superheroList = new ArrayList<>();
         superheroList.add(superheroSaved.getName());

@@ -17,14 +17,14 @@ public enum Skill {
         }
     }
 
-    public static Skill lookup(String key) {
-        return skillMap.get(key);
-    }
-
     private String description;
 
     Skill(String description) {
         this.description = description;
+    }
+
+    public static Skill lookup(String key) {
+        return skillMap.get(key);
     }
 
     public String getDescription() {

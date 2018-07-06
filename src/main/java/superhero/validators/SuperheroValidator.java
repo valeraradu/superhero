@@ -24,13 +24,13 @@ public class SuperheroValidator implements ConstraintValidator<IsTrueSuperhero, 
 
         if (repository.findByName(superhero.getName()) != null) {
             setExceptionMessage(
-                    String.format("superhero with name %s already exists",superhero.getName()), context);
+                    String.format("superhero with name %s already exists", superhero.getName()), context);
             return false;
         }
 
         if (repository.findByPseudonym(superhero.getPseudonym()) != null) {
             setExceptionMessage(
-                    String.format("superhero with pseudonym %s already exists",superhero.getPseudonym()), context);
+                    String.format("superhero with pseudonym %s already exists", superhero.getPseudonym()), context);
             return false;
         }
 

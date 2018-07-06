@@ -11,36 +11,31 @@ import java.util.List;
 @Table(name = "superhero")
 public class Superhero {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
-    @Column(unique=true)
-    @NotNull
-    @Size(min = 2, max = 80)
-    private String name;
-
-    @Column(unique=true)
-    @NotNull
-    @Size(min = 3, max = 80)
-    private String pseudonym;
-
-    @Size(min = 3, max = 80)
-    private String publisher;
-
     @NotNull
     @ElementCollection(fetch = FetchType.EAGER)
     Collection<String> skills;
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    @Column(unique = true)
+    @NotNull
+    @Size(min = 2, max = 80)
+    private String name;
+    @Column(unique = true)
+    @NotNull
+    @Size(min = 3, max = 80)
+    private String pseudonym;
+    @Size(min = 3, max = 80)
+    private String publisher;
     @ElementCollection
     private List<String> allies;
 
     @NotNull
-    @Column(name = "first_appearance", columnDefinition="DATETIME")
+    @Column(name = "first_appearance", columnDefinition = "DATETIME")
     @Temporal(TemporalType.DATE)
     private Date firstAppearance;
 
-    public Superhero(){
+    public Superhero() {
 
     }
 

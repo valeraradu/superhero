@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping(path =  "/auth")
+@RequestMapping(path = "/auth")
 public class ApiAuthenticationController {
     private static final String ATTRIBUTE_USER_KEY = "user";
     @Autowired

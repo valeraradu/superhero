@@ -1,28 +1,5 @@
 package superhero;
 
-import static org.hamcrest.Matchers.hasItem;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.isA;
-import static org.hamcrest.core.IsNull.notNullValue;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import javax.persistence.EntityManager;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -38,11 +15,25 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
-
 import org.springframework.web.context.WebApplicationContext;
 import superhero.controllers.SuperheroController;
 import superhero.models.Superhero;
 import superhero.models.SuperheroRepository;
+
+import javax.persistence.EntityManager;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.isA;
+import static org.hamcrest.core.IsNull.notNullValue;
+import static org.junit.Assert.assertNotNull;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -53,14 +44,11 @@ public class SuperheroEndpointTests extends BaseEndpointTest {
 
 
     @Autowired
-    private WebApplicationContext wac;
-
-    @Autowired
     EntityManager entityManager;
-
     @Autowired
     SuperheroController superheroController;
-
+    @Autowired
+    private WebApplicationContext wac;
     @Autowired
     private SuperheroRepository repository;
 
@@ -109,7 +97,7 @@ public class SuperheroEndpointTests extends BaseEndpointTest {
                 .andExpect(jsonPath("$.pseudonym", is(superhero.getPseudonym())))
                 .andExpect(jsonPath("$.publisher", is(superhero.getPublisher())));
 
-       assertNotNull(repository.findByName(superhero.getName()));
+        assertNotNull(repository.findByName(superhero.getName()));
     }
 
     @Test
@@ -123,7 +111,7 @@ public class SuperheroEndpointTests extends BaseEndpointTest {
         superhero = superheroController.addSuperhero(superhero).getBody();
         String content = json(superhero);
 
-        assertNotNull(repository.findOne(superhero.getId()));
+        assertNotNull(repository.findById(superhero.getId()).get());
 
         mockMvc.perform(
                 delete("/superhero/{id}", 1)
@@ -151,6 +139,6 @@ public class SuperheroEndpointTests extends BaseEndpointTest {
                 .andExpect(jsonPath("$.token", is(notNullValue())))
                 .andReturn().getResponse().getContentAsString();
 
-          System.out.print(authzToken);
+        System.out.print(authzToken);
     }
 }
