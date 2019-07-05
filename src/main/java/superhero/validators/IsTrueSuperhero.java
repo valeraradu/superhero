@@ -13,7 +13,7 @@ import static java.lang.annotation.ElementType.PARAMETER;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface IsTrueSuperhero {
 
-    String message() default "cannot update a contests which doesn't have the status New";
+    String message() default "cannot update";
 
     Class<?>[] groups() default {};
 
